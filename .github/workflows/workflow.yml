@@ -1,0 +1,19 @@
+name: Despliega a Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v2
+
+      - name: Copiar archivo mediante SSH password
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          source: "index.html"
+          target: "arn:aws:s3:::bucketnatalia/*"
